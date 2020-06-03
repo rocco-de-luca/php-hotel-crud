@@ -51,4 +51,25 @@ if($conn && $result->num_rows > 0) {
 $conn->close();
 
 return $record;
+}
+
+/**
+ * DELETE A RECORD BY ID
+ */
+
+ function removeById($conn, $table, $id, $url){
+     $sql = "DELETE FROM `$table` WHERE `id` = $id";
+     $result = $conn->query($sql);
+
+     var_dump($conn->affected_rows);
+
+     if ($result && $conn->affected_rows > 0){
+         header("Location: $url");
+     }else if($result){
+         die('nessuna stanza trovata');
+     }else{
+         die('errore');
+
+         $conn->close();
+     }
  }
